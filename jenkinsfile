@@ -1,19 +1,19 @@
 pipeline {
     agent none
     stages {
-        
         stage('Execute ZAP Command on Windows') {
-            
+            agent { label 'worker' } // Replace with the actual label of your worker node
             steps {
                 script {
                     try {
                         bat label: '', script: 'java -Xmx512m -jar "C:/Program Files/ZAP/Zed Attack Proxy/zap-2.15.0.jar" -dir test -cmd -port 8081 -autorun "C:/Users/rishi/Desktop/test.yaml"'
                     } catch (Exception e) {
-                        echo "An error occurred: ${e.message}"                         // Optionally, print the full stack trace                        
-                        echo "Stack Trace: ${e.getStackTrace()}"
-                        // Catch any exceptions and ignore them to prevent pipeline failure
+                        echo "An error occurred: ${e.message}"
+                        // Optionally print the stack trace if allowed, otherwise omit this line
+                        // echo "Stack Trace: ${e.getStackTrace()}" // This may need approval to be used
+                        // Mark the build as successful, even if there was an error
                         currentBuild.result = 'SUCCESS'
-                        echo "ZAP Command encountered an error, but it's being ignored.22"
+                        echo "ZAP Command encountered an error, but it's being ignored."
                     }
                 }
             }
