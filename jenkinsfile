@@ -1,5 +1,5 @@
 pipeline {
-    agent none
+    agent any
     stages {
         stage('Execute ZAP Command on Windows') {
             agent { label 'worker' } // Replace with the actual label of your worker node
