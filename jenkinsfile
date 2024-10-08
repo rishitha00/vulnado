@@ -13,7 +13,7 @@ pipeline {
                         echo "Stack Trace: ${e.getStackTrace()}"
                         // Catch any exceptions and ignore them to prevent pipeline failure
                         currentBuild.result = 'SUCCESS'
-                        echo "ZAP Command encountered an error, but it's being ignored."
+                        echo "ZAP Command encountered an error, but it's being ignored.22"
                     }
                 }
             }
